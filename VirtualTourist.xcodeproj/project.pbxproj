@@ -15,6 +15,7 @@
 		C57BFD5F24F436FB007FC3BB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C57BFD5D24F436FB007FC3BB /* LaunchScreen.storyboard */; };
 		C57BFD6824F4373E007FC3BB /* VirtualTourist.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C57BFD6624F4373E007FC3BB /* VirtualTourist.xcdatamodeld */; };
 		C57BFD6A24F43846007FC3BB /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C57BFD6924F43846007FC3BB /* DataController.swift */; };
+		C57BFD6F24F44177007FC3BB /* Pin+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C57BFD6E24F44176007FC3BB /* Pin+Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		C57BFD6024F436FB007FC3BB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C57BFD6724F4373E007FC3BB /* VirtualTourist.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = VirtualTourist.xcdatamodel; sourceTree = "<group>"; };
 		C57BFD6924F43846007FC3BB /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
+		C57BFD6E24F44176007FC3BB /* Pin+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Pin+Extensions.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,6 +78,7 @@
 			isa = PBXGroup;
 			children = (
 				C57BFD6924F43846007FC3BB /* DataController.swift */,
+				C57BFD6E24F44176007FC3BB /* Pin+Extensions.swift */,
 				C57BFD6624F4373E007FC3BB /* VirtualTourist.xcdatamodeld */,
 			);
 			path = Model;
@@ -173,6 +176,7 @@
 				C57BFD5724F436F9007FC3BB /* MapViewController.swift in Sources */,
 				C57BFD5324F436F9007FC3BB /* AppDelegate.swift in Sources */,
 				C57BFD5524F436F9007FC3BB /* SceneDelegate.swift in Sources */,
+				C57BFD6F24F44177007FC3BB /* Pin+Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
