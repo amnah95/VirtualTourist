@@ -20,45 +20,40 @@ class MapViewController: UIViewController {
     let mapStateKey = "MapStateKey"
     @IBOutlet weak var mapView: MKMapView!
     
+    var photosList: [FlickerPhoto] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
         mapView.delegate = self
+        
+        _ = FlickerClient.getPhotos(lat: 26.306343, lon: 50.167809, completion: { (results, error) in
+            self.photosList = results
+            print("Photos arra counnt: \(self.photosList.count)")
+        })
 
         //User last map state
         if let region = loadUserLastMapState() {
             mapView.region = region
         }
-        
-        setupFetchResultsController { (fetchStatus) in
-            if fetchStatus {
-                print("number of results \(self.fetchedResultsController.fetchedObjects?.count)")
-                self.loadPins()
-            } else {
-                print("No pins to load from Database")
-            }
-        }
 
+        setupFetchResultsController { (fetchStatus) in
+            if fetchStatus {self.loadPins()}
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setupFetchResultsController { (fetchStatus) in
-            if fetchStatus {
-                print("number of results \(self.fetchedResultsController.fetchedObjects?.count)")
-                self.loadPins()
-            } else {
-                print("No pins to load from Database")
-            }
+            if fetchStatus {self.loadPins()}
         }
-
     }
     
-    // set fetched results controller to nil
-     override func viewDidDisappear(_ animated: Bool) {
-         super.viewDidDisappear(animated)
-         fetchedResultsController = nil
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        // set fetched results controller to nil
+        fetchedResultsController = nil
      }
     
     @IBAction func longPressed(sender: UILongPressGestureRecognizer)
@@ -74,8 +69,6 @@ class MapViewController: UIViewController {
             addPin(coordinate: longPressCoordinate)
         }
     }
-    
-    
 }
 
 
@@ -114,6 +107,13 @@ extension MapViewController: MKMapViewDelegate {
 // MARK: Map related function
 extension MapViewController {
     
+    
+    func addAnnotation (coordinate: CLLocationCoordinate2D) {
+        let annotation = MKPointAnnotation()
+        annotation.coordinate = coordinate
+        mapView.addAnnotation(annotation)
+    }
+    
     func addPin(coordinate: CLLocationCoordinate2D) {
         let pin = Pin(context: dataController.viewContext)
         pin.latitude = coordinate.latitude
@@ -125,12 +125,6 @@ extension MapViewController {
         } catch {
             print("new pin is NOT save to database")
         }
-    }
-    
-    func addAnnotation (coordinate: CLLocationCoordinate2D) {
-        let annotation = MKPointAnnotation()
-        annotation.coordinate = coordinate
-        mapView.addAnnotation(annotation)
     }
     
     func loadPins() {
@@ -176,13 +170,14 @@ extension MapViewController: NSFetchedResultsControllerDelegate {
     
     func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
         
-        guard let point = anObject as? Pin else {
-            preconditionFailure("All changes observed in the map view controller should be for Point instances")
+        guard let pin = anObject as? Pin else {
+            print("no point to fetch")
+            return
         }
         
         switch type {
         case .insert:
-            addAnnotation(coordinate: point.coordinate)
+            addAnnotation(coordinate: pin.coordinate)
         default:
             break
         }
