@@ -4,6 +4,8 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
+        <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -35,6 +37,7 @@
                     <navigationItem key="navigationItem" id="w8J-W2-MEF"/>
                     <connections>
                         <outlet property="mapView" destination="cFM-jm-1vR" id="2BK-gZ-gFM"/>
+                        <segue destination="9bO-qv-Nb0" kind="show" identifier="toCollectionViewController" id="wwY-di-v2K"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -44,7 +47,110 @@
                     </connections>
                 </pongPressGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="1255.072463768116" y="109.82142857142857"/>
+            <point key="canvasLocation" x="1204" y="110"/>
+        </scene>
+        <!--Collection View Controller-->
+        <scene sceneID="eRP-aY-bX5">
+            <objects>
+                <viewController storyboardIdentifier="CollectionViewController" id="9bO-qv-Nb0" customClass="CollectionViewController" customModule="VirtualTourist" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="i3w-dh-NxL">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="fAE-Xm-wiM">
+                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="VuH-uv-ms8" userLabel="Map Stack View">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="212"/>
+                                        <subviews>
+                                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="ofq-mq-OfP">
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="212"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="212" id="0GK-vC-nB1"/>
+                                                    <constraint firstAttribute="width" secondItem="ofq-mq-OfP" secondAttribute="height" multiplier="404:55" id="IWI-HA-EfN"/>
+                                                </constraints>
+                                                <variation key="default">
+                                                    <mask key="constraints">
+                                                        <exclude reference="IWI-HA-EfN"/>
+                                                    </mask>
+                                                </variation>
+                                                <variation key="heightClass=compact-widthClass=regular">
+                                                    <mask key="constraints">
+                                                        <include reference="IWI-HA-EfN"/>
+                                                    </mask>
+                                                </variation>
+                                            </mapView>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="dlT-FN-HyH" userLabel="Collection Stack View">
+                                        <rect key="frame" x="0.0" y="220" width="414" height="554"/>
+                                        <subviews>
+                                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Peq-HP-vIq">
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="554"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Gwo-I7-Nra">
+                                                    <size key="itemSize" width="128" height="128"/>
+                                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                                </collectionViewFlowLayout>
+                                                <cells>
+                                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="CollectionViewCell" id="ot2-TM-uds" customClass="CollectionViewCell" customModule="VirtualTourist" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="GZW-R5-u6i">
+                                                            <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                                            <autoresizingMask key="autoresizingMask"/>
+                                                            <subviews>
+                                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="rTr-8b-ptt">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                                                </imageView>
+                                                            </subviews>
+                                                            <constraints>
+                                                                <constraint firstItem="rTr-8b-ptt" firstAttribute="leading" secondItem="GZW-R5-u6i" secondAttribute="leading" id="giT-xW-KID"/>
+                                                                <constraint firstAttribute="trailing" secondItem="rTr-8b-ptt" secondAttribute="trailing" id="hZm-QD-1Fc"/>
+                                                                <constraint firstAttribute="bottom" secondItem="rTr-8b-ptt" secondAttribute="bottom" id="sx0-eZ-smG"/>
+                                                                <constraint firstItem="rTr-8b-ptt" firstAttribute="top" secondItem="GZW-R5-u6i" secondAttribute="top" id="wly-bq-gCo"/>
+                                                            </constraints>
+                                                        </collectionViewCellContentView>
+                                                        <connections>
+                                                            <outlet property="imageView" destination="rTr-8b-ptt" id="raq-FY-VzI"/>
+                                                        </connections>
+                                                    </collectionViewCell>
+                                                </cells>
+                                            </collectionView>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="VuH-uv-ms8" secondAttribute="trailing" id="Vv4-lR-Yzq"/>
+                                    <constraint firstAttribute="bottom" secondItem="dlT-FN-HyH" secondAttribute="bottom" id="XLo-tT-JyR"/>
+                                    <constraint firstItem="dlT-FN-HyH" firstAttribute="leading" secondItem="fAE-Xm-wiM" secondAttribute="leading" id="aQx-fX-dO9"/>
+                                    <constraint firstAttribute="trailing" secondItem="dlT-FN-HyH" secondAttribute="trailing" id="ehb-ZN-VES"/>
+                                    <constraint firstItem="VuH-uv-ms8" firstAttribute="top" secondItem="fAE-Xm-wiM" secondAttribute="top" id="sKF-Ps-ECR"/>
+                                    <constraint firstItem="VuH-uv-ms8" firstAttribute="leading" secondItem="fAE-Xm-wiM" secondAttribute="leading" id="ubt-tN-hXu"/>
+                                </constraints>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="xto-LU-7aT" firstAttribute="trailing" secondItem="fAE-Xm-wiM" secondAttribute="trailing" id="Lvc-1E-ITb"/>
+                            <constraint firstItem="fAE-Xm-wiM" firstAttribute="top" secondItem="xto-LU-7aT" secondAttribute="top" id="hdU-Wq-xLN"/>
+                            <constraint firstItem="xto-LU-7aT" firstAttribute="bottom" secondItem="fAE-Xm-wiM" secondAttribute="bottom" id="tGN-Yd-3dg"/>
+                            <constraint firstItem="fAE-Xm-wiM" firstAttribute="leading" secondItem="xto-LU-7aT" secondAttribute="leading" id="ypd-e3-gDa"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="xto-LU-7aT"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="CVr-qc-pie"/>
+                    <connections>
+                        <outlet property="collectionView" destination="Peq-HP-vIq" id="05x-KO-xxI"/>
+                        <outlet property="flowLayout" destination="Gwo-I7-Nra" id="QIi-Ke-oUG"/>
+                        <outlet property="mapView" destination="ofq-mq-OfP" id="q1Q-SM-U3Y"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="KoP-jj-BCr" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2079.7101449275365" y="108.48214285714285"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="LYH-9R-HkA">

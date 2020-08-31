@@ -14,7 +14,7 @@ struct FlickerPhotoInfo: Codable {
     let pages: Int
     let perpage: Int
     let total: String
-    let photo: [FlickerPhoto]
+    let photo: [FlickerPhotoDetails]
     
 }
 

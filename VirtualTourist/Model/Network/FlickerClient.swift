@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import MapKit
 
 class FlickerClient {
     
@@ -44,13 +45,12 @@ class FlickerClient {
     }
     
     
-    // This is a genreal get request, it either returns a responseObject or an error
+    //This is a genreal get request, it either returns a responseObject or an error
     class func taskForGETRequest<ResponseType: Decodable>(url: URL, responseType: ResponseType.Type, completion: @escaping (ResponseType?, Error?) -> Void) -> URLSessionDataTask {
         let task = URLSession.shared.dataTask(with: url) { data, response, error in
             guard let data = data else {
                 DispatchQueue.main.async {
                     completion(nil, error)
-                    print("Task: no data found")
                 }
                 return
             }
@@ -63,20 +63,16 @@ class FlickerClient {
                 let responseObject = try decoder.decode(ResponseType.self, from: newData)
                 DispatchQueue.main.async {
                     completion(responseObject, nil)
-                    print("Task: response is there")
                 }
             } catch {
                 do {
                     let errorResponse = try decoder.decode(FlickerResponse.self, from: newData) as Error
                     DispatchQueue.main.async {
                         completion(nil, errorResponse)
-                        print("Task: cast error")
-                        
                     }
                 } catch {
                     DispatchQueue.main.async {
                         completion(nil, error)
-                        print("Task: could not handle error")
                     }
                 }
             }
@@ -86,24 +82,38 @@ class FlickerClient {
         return task
     }
     
-    static func getPhotos(lat: Double, lon: Double, completion: @escaping ([FlickerPhoto], Error?) -> Void) {
+    
+    //Get searched location photos
+    static func getPhotos(pinCoordinate: CLLocationCoordinate2D, completion: @escaping ([FlickerPhotoDetails], Error?) -> Void) {
         
-        print("GetPhotos: Accessed")
-        FlickerClient.Coordinates.latitude = lat
-        FlickerClient.Coordinates.longitude = lon
-        
-        print("URL: \(Endpoints.searchPhotos.url)")
-        
+        FlickerClient.Coordinates.latitude = pinCoordinate.latitude
+        FlickerClient.Coordinates.longitude = pinCoordinate.longitude
+                
         _ = taskForGETRequest(url: Endpoints.searchPhotos.url, responseType: FlickerPhotoResults.self) { response, error in
             if let response = response {
                 completion(response.photos.photo , nil)
-                print("GetPhotos: Sucessed")
-                
             } else {
-                print("GetPhotos: Faild")
                 completion([], error)
             }
         }
+    }
+    
+    
+    // Load image using its URL
+    class func requestImageFile(_ url : URL, completion: @escaping (Data?,Error?) -> Void){
+        let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
+            guard let data = data else
+            {
+                print("no data were obtaind for photo")
+                completion(nil, error)
+                return
+            }
+            print("photo data from link: \(url)")
+            print(data)
+
+            completion(data, nil)
+        }
+        task.resume()
     }
 }
 
@@ -116,8 +126,7 @@ extension FlickerClient {
         
         let range = Range(uncheckedBounds: (14, data.count - 1))
         let newData = data.subdata(in: range)
-        
-        print(String(data: newData, encoding: .utf8)!)
+
         return newData
     }
     

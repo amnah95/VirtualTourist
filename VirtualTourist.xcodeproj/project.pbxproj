@@ -7,9 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C521C92F24FC3C6200E9B3F5 /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C521C92E24FC3C6200E9B3F5 /* CollectionViewCell.swift */; };
 		C571DCDF24F57ED5006295F1 /* FlickerClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = C571DCDE24F57ED5006295F1 /* FlickerClient.swift */; };
 		C571DCE124F59341006295F1 /* FlickerResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C571DCE024F59341006295F1 /* FlickerResponse.swift */; };
-		C571DCE324F59460006295F1 /* FlickerPhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = C571DCE224F59460006295F1 /* FlickerPhoto.swift */; };
+		C571DCE324F59460006295F1 /* FlickerPhotoDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = C571DCE224F59460006295F1 /* FlickerPhotoDetails.swift */; };
 		C571DCE524F59670006295F1 /* FlickerPhotoInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = C571DCE424F59670006295F1 /* FlickerPhotoInfo.swift */; };
 		C571DCE924F5AC67006295F1 /* FlickerPhotoResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = C571DCE824F5AC67006295F1 /* FlickerPhotoResults.swift */; };
 		C57BFD5324F436F9007FC3BB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C57BFD5224F436F9007FC3BB /* AppDelegate.swift */; };
@@ -21,12 +22,14 @@
 		C57BFD6824F4373E007FC3BB /* VirtualTourist.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C57BFD6624F4373E007FC3BB /* VirtualTourist.xcdatamodeld */; };
 		C57BFD6A24F43846007FC3BB /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C57BFD6924F43846007FC3BB /* DataController.swift */; };
 		C57BFD6F24F44177007FC3BB /* Pin+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C57BFD6E24F44176007FC3BB /* Pin+Extensions.swift */; };
+		C5F9163724FC2F39006C4963 /* CollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5F9163624FC2F39006C4963 /* CollectionViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C521C92E24FC3C6200E9B3F5 /* CollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
 		C571DCDE24F57ED5006295F1 /* FlickerClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlickerClient.swift; sourceTree = "<group>"; };
 		C571DCE024F59341006295F1 /* FlickerResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlickerResponse.swift; sourceTree = "<group>"; };
-		C571DCE224F59460006295F1 /* FlickerPhoto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlickerPhoto.swift; sourceTree = "<group>"; };
+		C571DCE224F59460006295F1 /* FlickerPhotoDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlickerPhotoDetails.swift; sourceTree = "<group>"; };
 		C571DCE424F59670006295F1 /* FlickerPhotoInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlickerPhotoInfo.swift; sourceTree = "<group>"; };
 		C571DCE824F5AC67006295F1 /* FlickerPhotoResults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlickerPhotoResults.swift; sourceTree = "<group>"; };
 		C57BFD4F24F436F9007FC3BB /* VirtualTourist.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VirtualTourist.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -40,6 +43,7 @@
 		C57BFD6724F4373E007FC3BB /* VirtualTourist.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = VirtualTourist.xcdatamodel; sourceTree = "<group>"; };
 		C57BFD6924F43846007FC3BB /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
 		C57BFD6E24F44176007FC3BB /* Pin+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Pin+Extensions.swift"; sourceTree = "<group>"; };
+		C5F9163624FC2F39006C4963 /* CollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,7 +72,7 @@
 			children = (
 				C571DCDE24F57ED5006295F1 /* FlickerClient.swift */,
 				C571DCE024F59341006295F1 /* FlickerResponse.swift */,
-				C571DCE224F59460006295F1 /* FlickerPhoto.swift */,
+				C571DCE224F59460006295F1 /* FlickerPhotoDetails.swift */,
 				C571DCE424F59670006295F1 /* FlickerPhotoInfo.swift */,
 				C571DCE824F5AC67006295F1 /* FlickerPhotoResults.swift */,
 			);
@@ -109,6 +113,7 @@
 		C57BFD6B24F43A74007FC3BB /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				C521C92E24FC3C6200E9B3F5 /* CollectionViewCell.swift */,
 				C571DCDD24F57EAC006295F1 /* Network */,
 				C571DCDC24F57E9E006295F1 /* CoreData */,
 			);
@@ -118,6 +123,7 @@
 		C57BFD6C24F43A81007FC3BB /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				C5F9163624FC2F39006C4963 /* CollectionViewController.swift */,
 				C57BFD5624F436F9007FC3BB /* MapViewController.swift */,
 			);
 			path = Controller;
@@ -202,13 +208,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C5F9163724FC2F39006C4963 /* CollectionViewController.swift in Sources */,
 				C57BFD6A24F43846007FC3BB /* DataController.swift in Sources */,
 				C571DCE924F5AC67006295F1 /* FlickerPhotoResults.swift in Sources */,
 				C571DCDF24F57ED5006295F1 /* FlickerClient.swift in Sources */,
 				C57BFD6824F4373E007FC3BB /* VirtualTourist.xcdatamodeld in Sources */,
-				C571DCE324F59460006295F1 /* FlickerPhoto.swift in Sources */,
+				C571DCE324F59460006295F1 /* FlickerPhotoDetails.swift in Sources */,
 				C57BFD5724F436F9007FC3BB /* MapViewController.swift in Sources */,
 				C57BFD5324F436F9007FC3BB /* AppDelegate.swift in Sources */,
+				C521C92F24FC3C6200E9B3F5 /* CollectionViewCell.swift in Sources */,
 				C571DCE524F59670006295F1 /* FlickerPhotoInfo.swift in Sources */,
 				C57BFD5524F436F9007FC3BB /* SceneDelegate.swift in Sources */,
 				C57BFD6F24F44177007FC3BB /* Pin+Extensions.swift in Sources */,

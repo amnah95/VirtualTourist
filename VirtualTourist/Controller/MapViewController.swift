@@ -19,19 +19,12 @@ class MapViewController: UIViewController {
     // MapKit related Variables/Constats
     let mapStateKey = "MapStateKey"
     @IBOutlet weak var mapView: MKMapView!
-    
-    var photosList: [FlickerPhoto] = []
-    
+        
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
         mapView.delegate = self
-        
-        _ = FlickerClient.getPhotos(lat: 26.306343, lon: 50.167809, completion: { (results, error) in
-            self.photosList = results
-            print("Photos arra counnt: \(self.photosList.count)")
-        })
 
         //User last map state
         if let region = loadUserLastMapState() {
@@ -56,10 +49,11 @@ class MapViewController: UIViewController {
         fetchedResultsController = nil
      }
     
+    
+    // Adding new pin
     @IBAction func longPressed(sender: UILongPressGestureRecognizer)
     {
         if sender.state == .began {
-            print("longpressed")
             
             // Fetch selected location info
             let longPressLocation = sender.location(in: mapView)
@@ -67,11 +61,48 @@ class MapViewController: UIViewController {
             
             // Add a pin to database
             addPin(coordinate: longPressCoordinate)
+            
         }
+    }
+    
+    // Checking photos of location
+    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+
+        let coordinate = view.annotation?.coordinate
+        performSegue(withIdentifier: "toCollectionViewController", sender: coordinate)
+        mapView.deselectAnnotation(view.annotation, animated: true)
+        
     }
 }
 
 
+// MARK: Prepare segue functions
+
+extension MapViewController {
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let viewController = segue.destination as? CollectionViewController {
+            // Pin selected
+            let tappedCoordinate = sender as! CLLocationCoordinate2D
+            viewController.pin = getPinFromCoordinate(tappedCoordinate: tappedCoordinate)
+            viewController.dataController = self.dataController
+        }
+    }
+    
+    
+    // To obtain pin based on coordniate
+    func getPinFromCoordinate (tappedCoordinate: CLLocationCoordinate2D) -> Pin? {
+                
+        if let pins = fetchedResultsController.fetchedObjects {
+            for pin in pins {
+                if (pin.coordinate.latitude == tappedCoordinate.latitude &&
+                    pin.coordinate.longitude == tappedCoordinate.longitude)
+                { return pin }
+            }
+        }
+        return nil
+    }
+}
 
 // MARK: Mapview delgate for mapView state data
 extension MapViewController: MKMapViewDelegate {
@@ -104,9 +135,8 @@ extension MapViewController: MKMapViewDelegate {
 }
 
 
-// MARK: Map related function
+// MARK: MapView related function
 extension MapViewController {
-    
     
     func addAnnotation (coordinate: CLLocationCoordinate2D) {
         let annotation = MKPointAnnotation()
@@ -129,7 +159,7 @@ extension MapViewController {
     
     func loadPins() {
         guard let pins = fetchedResultsController.fetchedObjects else {
-            print("No objectes are fetched from fetchedResultsController")
+            print("No pins are fetched from fetchedResultsController")
             return
         }
         for pin in pins {
@@ -137,12 +167,12 @@ extension MapViewController {
             let coordinate = pin.coordinate
             addAnnotation(coordinate: coordinate)
         }
-        print("all fetched pins objectes are added to map")
+        print("all fetched pins are added to map")
     }
     
 }
 
-// MARK: Fetch Results Controller
+// MARK: Fetch results controller
 extension MapViewController: NSFetchedResultsControllerDelegate {
     
     // Loading exsiting data in data base
@@ -182,8 +212,5 @@ extension MapViewController: NSFetchedResultsControllerDelegate {
             break
         }
     }
-    
-    
-    
 }
 

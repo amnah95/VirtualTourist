@@ -1,5 +1,5 @@
 //
-//  FlickerPhoto.swift
+//  FlickerPhotoDetails.swift
 //  VirtualTourist
 //
 //  Created by Amnah on 8/25/20.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct FlickerPhoto: Codable {
+struct FlickerPhotoDetails: Codable {
     
     let id: String
     let owner: String
@@ -31,4 +31,9 @@ struct FlickerPhoto: Codable {
     var isFamily: Bool {
         return isfamily == 1
     }
+    
+    func imageURL() -> URL {
+        return URL(string: "https://farm\(farm).staticflickr.com/\(server)/\(id)_\(secret)_q.jpg")!
+    }
+    
 }
