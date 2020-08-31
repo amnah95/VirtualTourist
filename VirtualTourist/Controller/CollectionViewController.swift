@@ -82,7 +82,7 @@ extension CollectionViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return fetchedResultsController.sections?[section].objects?.count ?? 0
+        return fetchedResultsController.sections?[0].numberOfObjects ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -126,7 +126,7 @@ extension CollectionViewController: NSFetchedResultsControllerDelegate {
         fetchRequest.sortDescriptors = [] //Needs to be there even if empty
         
         // Assign Fetch results controller
-        fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: dataController.viewContext, sectionNameKeyPath: nil, cacheName: "Photo")
+        fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: dataController.viewContext, sectionNameKeyPath: nil, cacheName: "\(pin)-photo")
         
         // Set fectch controller delegate
         fetchedResultsController.delegate = self
@@ -150,6 +150,7 @@ extension CollectionViewController: NSFetchedResultsControllerDelegate {
         switch type {
         case .insert:
             collectionView.insertItems(at: [newIndexPath!])
+            break
         default:
             break
         }
