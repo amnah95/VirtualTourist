@@ -14,6 +14,9 @@ import MapKit
 
 class CollectionViewController: UIViewController {
     
+    // Test
+    var swiftSymbols: [UIImage] = [UIImage(systemName: "sun.min.fill")!, UIImage(systemName: "sunrise.fill")!, UIImage(systemName: "sun.dust.fill")!]
+    
     // CoreData related Variables/Constats
     var dataController: DataController!
     var fetchedResultsController: NSFetchedResultsController<Photo>!
@@ -27,7 +30,8 @@ class CollectionViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
+        collectionView.dataSource = self
+        collectionView.delegate = self
         setUpMapView()
         setCollectionViewFlow()
         
@@ -75,7 +79,7 @@ extension CollectionViewController: MKMapViewDelegate {
 
 
 // MARK: Collection view data source
-extension CollectionViewController: UICollectionViewDataSource {
+extension CollectionViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return fetchedResultsController.sections?.count ?? 1
@@ -86,13 +90,21 @@ extension CollectionViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
-        let aPhoto = fetchedResultsController.object(at: indexPath)
+
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: kCollectionViewCellID, for: indexPath) as! CollectionViewCell
-        
+    
+        let aPhoto = fetchedResultsController.object(at: indexPath)
+
         cell.imageView.image = UIImage(data: aPhoto.imageData!)
-        
+
         return cell
+    }
+    
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        print("Photos is selected")
+        deletePhotoData(at: indexPath)
+        collectionView.reloadData()
     }
     
 }
@@ -151,6 +163,9 @@ extension CollectionViewController: NSFetchedResultsControllerDelegate {
         case .insert:
             collectionView.insertItems(at: [newIndexPath!])
             break
+        case .delete:
+            collectionView.deleteItems(at: [indexPath!])
+            break
         default:
             break
         }
@@ -158,13 +173,15 @@ extension CollectionViewController: NSFetchedResultsControllerDelegate {
 }
 
 
-// MARK: Photos requesting from network
+// MARK: Adding and deleting photo from Database
 extension CollectionViewController {
     
     // Adding photo to data base
     func addPhotoData (data: Data) {
         let photo = Photo(context: dataController.viewContext)
         photo.imageData = data
+        photo.pin = self.pin
+        
         do {
             try dataController.viewContext.save()
             print("a photo data has been added to database")
@@ -173,6 +190,29 @@ extension CollectionViewController {
         }
     }
     
+    // Deleteing photo form database
+    func deletePhotoData (at indexPath: IndexPath) {
+        
+        print("Function has been called")
+        
+        let photoToDelete = fetchedResultsController.object(at: indexPath)
+        dataController.viewContext.delete(photoToDelete)
+        
+        do {
+            try dataController.viewContext.save()
+            print("a photo data has been deleted from database")
+        } catch {
+            print("a photo data was NOT deleted from database")
+        }
+        
+    }
+    
+}
+
+
+// MARK: Photos requesting from network
+extension CollectionViewController {
+    
     // Get photos data from network
     func getAllPhotosData() {
         
@@ -180,10 +220,11 @@ extension CollectionViewController {
         
         print("Requsting all new photos")
         
-        _ = FlickerClient.getPhotos(pinCoordinate: pin.coordinate, completion: { (results, error) in
+        _ = FlickerClient.getPhotos(pinCoordinate: pin.coordinate, page: nil, completion: { (results, error) in
             photosList = results
             print("Number of photos for this point:")
             print(String(describing: photosList.count))
+            
             
             for photo in photosList {
                 FlickerClient.requestImageFile(photo.imageURL()) { (data, error) in

@@ -19,7 +19,8 @@ class FlickerClient {
     }
     
     static let searchRaduis = 10
-    static let numberOfResults = 10
+    static let numberOfResults = 60
+    static var page = 1
     
     
     enum Endpoints: String {
@@ -27,6 +28,8 @@ class FlickerClient {
         static let apiKeyParameter = "?api_key=\(FlickerClient.apiKey)"
         static let radiusParameter = "&radius=\(FlickerClient.searchRaduis)"
         static let perPageParameter = "&per_page=\(FlickerClient.numberOfResults)"
+        static let pageParameter = "&page=\(FlickerClient.page)"
+        
         
         
         
@@ -35,7 +38,7 @@ class FlickerClient {
         var stringValue: String {
             switch self {
             case .searchPhotos:
-                return Endpoints.base + Endpoints.apiKeyParameter + "&method=flickr.photos.search" + "&format=json" + Endpoints.radiusParameter + Endpoints.perPageParameter + "&per_page=\(FlickerClient.numberOfResults)" + "&lat=\(Coordinates.latitude)" + "&lon=\(Coordinates.longitude)"
+                return Endpoints.base + Endpoints.apiKeyParameter + "&method=flickr.photos.search" + "&format=json" + Endpoints.radiusParameter + Endpoints.perPageParameter + "&per_page=\(FlickerClient.numberOfResults)" + "&page=\(FlickerClient.page)" + "&lat=\(Coordinates.latitude)" + "&lon=\(Coordinates.longitude)"
             }
         }
         
@@ -84,7 +87,11 @@ class FlickerClient {
     
     
     //Get searched location photos
-    static func getPhotos(pinCoordinate: CLLocationCoordinate2D, completion: @escaping ([FlickerPhotoDetails], Error?) -> Void) {
+    static func getPhotos(pinCoordinate: CLLocationCoordinate2D, page: Int?, completion: @escaping ([FlickerPhotoDetails], Error?) -> Void) {
+        
+        if let page = page {
+            self.page = page
+        }
         
         FlickerClient.Coordinates.latitude = pinCoordinate.latitude
         FlickerClient.Coordinates.longitude = pinCoordinate.longitude

@@ -83,12 +83,12 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="dlT-FN-HyH" userLabel="Collection Stack View">
-                                        <rect key="frame" x="0.0" y="220" width="414" height="554"/>
+                                        <rect key="frame" x="0.0" y="220" width="414" height="501"/>
                                         <subviews>
                                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Peq-HP-vIq">
-                                                <rect key="frame" x="0.0" y="0.0" width="414" height="554"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="501"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Gwo-I7-Nra">
+                                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Gwo-I7-Nra">
                                                     <size key="itemSize" width="128" height="128"/>
                                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -102,7 +102,7 @@
                                                             <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <subviews>
-                                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="rTr-8b-ptt">
+                                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="rTr-8b-ptt">
                                                                     <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
                                                                 </imageView>
                                                             </subviews>
@@ -121,12 +121,28 @@
                                             </collectionView>
                                         </subviews>
                                     </stackView>
+                                    <stackView opaque="NO" contentMode="scaleAspectFit" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="yAW-iz-mRP">
+                                        <rect key="frame" x="0.0" y="729" width="414" height="45"/>
+                                        <subviews>
+                                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="0gl-Y7-jRo">
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="45"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="45" id="fjr-ir-0Cb"/>
+                                                </constraints>
+                                                <items>
+                                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="0ZZ-fr-OMv"/>
+                                                    <barButtonItem title="New Collection" id="yci-W6-SNe"/>
+                                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="Gff-VW-kTC"/>
+                                                </items>
+                                            </toolbar>
+                                        </subviews>
+                                    </stackView>
                                 </subviews>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="VuH-uv-ms8" secondAttribute="trailing" id="Vv4-lR-Yzq"/>
-                                    <constraint firstAttribute="bottom" secondItem="dlT-FN-HyH" secondAttribute="bottom" id="XLo-tT-JyR"/>
                                     <constraint firstItem="dlT-FN-HyH" firstAttribute="leading" secondItem="fAE-Xm-wiM" secondAttribute="leading" id="aQx-fX-dO9"/>
                                     <constraint firstAttribute="trailing" secondItem="dlT-FN-HyH" secondAttribute="trailing" id="ehb-ZN-VES"/>
+                                    <constraint firstAttribute="bottom" secondItem="yAW-iz-mRP" secondAttribute="bottom" id="okl-6n-fAI"/>
                                     <constraint firstItem="VuH-uv-ms8" firstAttribute="top" secondItem="fAE-Xm-wiM" secondAttribute="top" id="sKF-Ps-ECR"/>
                                     <constraint firstItem="VuH-uv-ms8" firstAttribute="leading" secondItem="fAE-Xm-wiM" secondAttribute="leading" id="ubt-tN-hXu"/>
                                 </constraints>
