@@ -11,8 +11,7 @@ import CoreData
 
 
 class DataController {
-    
-    
+        
     // This will remain unchanged for the entire app
     let persistentContainer: NSPersistentContainer!
     

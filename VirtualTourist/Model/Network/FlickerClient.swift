@@ -18,8 +18,8 @@ class FlickerClient {
         static var longitude = 0.0
     }
     
-    static let searchRaduis = 10
-    static let numberOfResults = 60
+    static let searchRaduis = 24
+    static let numberOfResults = 12
     static var page = 1
     
     
@@ -87,11 +87,9 @@ class FlickerClient {
     
     
     //Get searched location photos
-    static func getPhotos(pinCoordinate: CLLocationCoordinate2D, page: Int?, completion: @escaping ([FlickerPhotoDetails], Error?) -> Void) {
+    static func getPhotos(pinCoordinate: CLLocationCoordinate2D, completion: @escaping ([FlickerPhotoDetails], Error?) -> Void) {
         
-        if let page = page {
-            self.page = page
-        }
+        self.page = Int.random(in: 0...10)
         
         FlickerClient.Coordinates.latitude = pinCoordinate.latitude
         FlickerClient.Coordinates.longitude = pinCoordinate.longitude

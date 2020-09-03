@@ -27,6 +27,8 @@ class CollectionViewController: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var flowLayout: UICollectionViewFlowLayout!
     
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -57,6 +59,13 @@ class CollectionViewController: UIViewController {
         // set fetched results controller to nil
         fetchedResultsController = nil
     }
+    
+    
+    @IBAction func newCollectionButton(_ sender: Any) {
+        self.deleteAllPhotos()
+        self.getAllPhotosData()
+    }
+    
 }
 
 // MARK: MapView related functions
@@ -90,13 +99,13 @@ extension CollectionViewController: UICollectionViewDataSource, UICollectionView
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-
+        
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: kCollectionViewCellID, for: indexPath) as! CollectionViewCell
-    
+        
         let aPhoto = fetchedResultsController.object(at: indexPath)
-
+        
         cell.imageView.image = UIImage(data: aPhoto.imageData!)
-
+        
         return cell
     }
     
@@ -166,6 +175,8 @@ extension CollectionViewController: NSFetchedResultsControllerDelegate {
         case .delete:
             collectionView.deleteItems(at: [indexPath!])
             break
+        case .update:
+            collectionView.reloadItems(at: [indexPath!])
         default:
             break
         }
@@ -193,8 +204,6 @@ extension CollectionViewController {
     // Deleteing photo form database
     func deletePhotoData (at indexPath: IndexPath) {
         
-        print("Function has been called")
-        
         let photoToDelete = fetchedResultsController.object(at: indexPath)
         dataController.viewContext.delete(photoToDelete)
         
@@ -203,6 +212,26 @@ extension CollectionViewController {
             print("a photo data has been deleted from database")
         } catch {
             print("a photo data was NOT deleted from database")
+        }
+        
+    }
+    
+    // Deleteing all photos form database
+    func deleteAllPhotos () {
+        
+        if let photos = self.fetchedResultsController.fetchedObjects {
+            
+            for photo in photos {
+                self.dataController.viewContext.delete(photo)
+            }
+            
+        }
+        
+        do {
+            try self.dataController.viewContext.save()
+            print("all photos has been deleted from database")
+        } catch {
+            print("all photos data was NOT deleted from database")
         }
         
     }
@@ -220,7 +249,7 @@ extension CollectionViewController {
         
         print("Requsting all new photos")
         
-        _ = FlickerClient.getPhotos(pinCoordinate: pin.coordinate, page: nil, completion: { (results, error) in
+        _ = FlickerClient.getPhotos(pinCoordinate: pin.coordinate, completion: { (results, error) in
             photosList = results
             print("Number of photos for this point:")
             print(String(describing: photosList.count))
