@@ -17,7 +17,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         
         dataController.load()
-        print("Data controller loaded in AppDelegate")
         
         return true
     }

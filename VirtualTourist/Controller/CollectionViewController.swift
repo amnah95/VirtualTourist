@@ -221,17 +221,17 @@ extension CollectionViewController {
         
         if let photos = self.fetchedResultsController.fetchedObjects {
             
-            for photo in photos {
+            for photo in photos.reversed() {
                 self.dataController.viewContext.delete(photo)
+                
+                do {
+                    try self.dataController.viewContext.save()
+                    print("all photos has been deleted from database")
+                } catch {
+                    print("all photos data was NOT deleted from database")
+                }
             }
             
-        }
-        
-        do {
-            try self.dataController.viewContext.save()
-            print("all photos has been deleted from database")
-        } catch {
-            print("all photos data was NOT deleted from database")
         }
         
     }
