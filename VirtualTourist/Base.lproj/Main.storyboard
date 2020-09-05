@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="GuQ-w4-KwU">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.3" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="GuQ-w4-KwU">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
@@ -94,6 +94,10 @@
                                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                 </collectionViewFlowLayout>
+                                                <activityIndicatorView key="backgroundView" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="large" id="z8b-cV-eps">
+                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="501"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                </activityIndicatorView>
                                                 <cells>
                                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="CollectionViewCell" id="ot2-TM-uds" customClass="CollectionViewCell" customModule="VirtualTourist" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
@@ -105,16 +109,25 @@
                                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="rTr-8b-ptt">
                                                                     <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
                                                                 </imageView>
+                                                                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="8UZ-Xl-3S8">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                                                </activityIndicatorView>
                                                             </subviews>
                                                             <constraints>
+                                                                <constraint firstItem="8UZ-Xl-3S8" firstAttribute="top" secondItem="GZW-R5-u6i" secondAttribute="top" id="Jbh-6t-SYz"/>
+                                                                <constraint firstAttribute="bottom" secondItem="8UZ-Xl-3S8" secondAttribute="bottom" id="bOc-Xg-cX3"/>
                                                                 <constraint firstItem="rTr-8b-ptt" firstAttribute="leading" secondItem="GZW-R5-u6i" secondAttribute="leading" id="giT-xW-KID"/>
                                                                 <constraint firstAttribute="trailing" secondItem="rTr-8b-ptt" secondAttribute="trailing" id="hZm-QD-1Fc"/>
+                                                                <constraint firstAttribute="trailing" secondItem="8UZ-Xl-3S8" secondAttribute="trailing" id="pFZ-La-NQm"/>
                                                                 <constraint firstAttribute="bottom" secondItem="rTr-8b-ptt" secondAttribute="bottom" id="sx0-eZ-smG"/>
                                                                 <constraint firstItem="rTr-8b-ptt" firstAttribute="top" secondItem="GZW-R5-u6i" secondAttribute="top" id="wly-bq-gCo"/>
+                                                                <constraint firstItem="8UZ-Xl-3S8" firstAttribute="leading" secondItem="GZW-R5-u6i" secondAttribute="leading" id="zez-cv-lnW"/>
                                                             </constraints>
                                                         </collectionViewCellContentView>
+                                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <connections>
                                                             <outlet property="imageView" destination="rTr-8b-ptt" id="raq-FY-VzI"/>
+                                                            <outlet property="photosActivityIndicator" destination="8UZ-Xl-3S8" id="UUY-ui-C6x"/>
                                                         </connections>
                                                     </collectionViewCell>
                                                 </cells>
@@ -165,6 +178,7 @@
                     <connections>
                         <outlet property="collectionView" destination="Peq-HP-vIq" id="05x-KO-xxI"/>
                         <outlet property="flowLayout" destination="Gwo-I7-Nra" id="QIi-Ke-oUG"/>
+                        <outlet property="loadingPhotosIndicator" destination="z8b-cV-eps" id="DXj-LO-JOb"/>
                         <outlet property="mapView" destination="ofq-mq-OfP" id="q1Q-SM-U3Y"/>
                     </connections>
                 </viewController>

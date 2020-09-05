@@ -26,7 +26,7 @@ class CollectionViewController: UIViewController {
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var flowLayout: UICollectionViewFlowLayout!
-    
+    @IBOutlet weak var loadingPhotosIndicator: UIActivityIndicatorView!
     
     
     override func viewDidLoad() {
@@ -100,18 +100,21 @@ extension CollectionViewController: UICollectionViewDataSource, UICollectionView
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
+        
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: kCollectionViewCellID, for: indexPath) as! CollectionViewCell
+        
+        cell.photosActivityIndicator.startAnimating()
         
         let aPhoto = fetchedResultsController.object(at: indexPath)
         
         cell.imageView.image = UIImage(data: aPhoto.imageData!)
+
+        cell.photosActivityIndicator.stopAnimating()
         
         return cell
     }
     
-    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print("Photos is selected")
         deletePhotoData(at: indexPath)
         collectionView.reloadData()
     }
@@ -147,7 +150,7 @@ extension CollectionViewController: NSFetchedResultsControllerDelegate {
         fetchRequest.sortDescriptors = [] //Needs to be there even if empty
         
         // Assign Fetch results controller
-        fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: dataController.viewContext, sectionNameKeyPath: nil, cacheName: "\(pin)-photo")
+        fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: dataController.viewContext, sectionNameKeyPath: nil, cacheName: "\(pin!)-photo")
         
         // Set fectch controller delegate
         fetchedResultsController.delegate = self
@@ -245,6 +248,9 @@ extension CollectionViewController {
     // Get photos data from network
     func getAllPhotosData() {
         
+        self.loadingPhotosIndicator.startAnimating()
+        self.loadingPhotosIndicator.isHidden = false
+        
         var photosList: [FlickerPhotoDetails] = []
         
         print("Requsting all new photos")
@@ -262,5 +268,7 @@ extension CollectionViewController {
                 }
             }
         })
+
+        self.loadingPhotosIndicator.stopAnimating()
     }
 }
