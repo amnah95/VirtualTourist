@@ -41,7 +41,7 @@ class CollectionViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+                
         setupFetchResultsController { (fetchStatus) in
             if fetchStatus {
                 if self.fetchedResultsController.fetchedObjects?.count == 0 {
@@ -103,13 +103,9 @@ extension CollectionViewController: UICollectionViewDataSource, UICollectionView
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: kCollectionViewCellID, for: indexPath) as! CollectionViewCell
         
-        cell.photosActivityIndicator.startAnimating()
-        
         let aPhoto = fetchedResultsController.object(at: indexPath)
         
         cell.imageView.image = UIImage(data: aPhoto.imageData!)
-
-        cell.photosActivityIndicator.stopAnimating()
         
         return cell
     }
@@ -234,11 +230,8 @@ extension CollectionViewController {
                     print("all photos data was NOT deleted from database")
                 }
             }
-            
         }
-        
     }
-    
 }
 
 
@@ -267,8 +260,8 @@ extension CollectionViewController {
                     self.addPhotoData(data: data)
                 }
             }
+            self.loadingPhotosIndicator.stopAnimating()
+            self.loadingPhotosIndicator.isHidden = true
         })
-
-        self.loadingPhotosIndicator.stopAnimating()
     }
 }

@@ -97,6 +97,7 @@
                                                 <activityIndicatorView key="backgroundView" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="large" id="z8b-cV-eps">
                                                     <rect key="frame" x="0.0" y="0.0" width="414" height="501"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <color key="color" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </activityIndicatorView>
                                                 <cells>
                                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="CollectionViewCell" id="ot2-TM-uds" customClass="CollectionViewCell" customModule="VirtualTourist" customModuleProvider="target">
@@ -109,25 +110,17 @@
                                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="rTr-8b-ptt">
                                                                     <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
                                                                 </imageView>
-                                                                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="8UZ-Xl-3S8">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
-                                                                </activityIndicatorView>
                                                             </subviews>
                                                             <constraints>
-                                                                <constraint firstItem="8UZ-Xl-3S8" firstAttribute="top" secondItem="GZW-R5-u6i" secondAttribute="top" id="Jbh-6t-SYz"/>
-                                                                <constraint firstAttribute="bottom" secondItem="8UZ-Xl-3S8" secondAttribute="bottom" id="bOc-Xg-cX3"/>
                                                                 <constraint firstItem="rTr-8b-ptt" firstAttribute="leading" secondItem="GZW-R5-u6i" secondAttribute="leading" id="giT-xW-KID"/>
                                                                 <constraint firstAttribute="trailing" secondItem="rTr-8b-ptt" secondAttribute="trailing" id="hZm-QD-1Fc"/>
-                                                                <constraint firstAttribute="trailing" secondItem="8UZ-Xl-3S8" secondAttribute="trailing" id="pFZ-La-NQm"/>
                                                                 <constraint firstAttribute="bottom" secondItem="rTr-8b-ptt" secondAttribute="bottom" id="sx0-eZ-smG"/>
                                                                 <constraint firstItem="rTr-8b-ptt" firstAttribute="top" secondItem="GZW-R5-u6i" secondAttribute="top" id="wly-bq-gCo"/>
-                                                                <constraint firstItem="8UZ-Xl-3S8" firstAttribute="leading" secondItem="GZW-R5-u6i" secondAttribute="leading" id="zez-cv-lnW"/>
                                                             </constraints>
                                                         </collectionViewCellContentView>
                                                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <connections>
                                                             <outlet property="imageView" destination="rTr-8b-ptt" id="raq-FY-VzI"/>
-                                                            <outlet property="photosActivityIndicator" destination="8UZ-Xl-3S8" id="UUY-ui-C6x"/>
                                                         </connections>
                                                     </collectionViewCell>
                                                 </cells>
