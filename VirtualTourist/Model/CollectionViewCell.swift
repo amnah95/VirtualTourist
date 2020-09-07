@@ -14,5 +14,9 @@ let kCollectionViewCellID = "CollectionViewCell"
 class CollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var photoActivityIndicator: UIActivityIndicatorView!
     
+    override func prepareForReuse() {
+        photoActivityIndicator.startAnimating()
+    }
 }

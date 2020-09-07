@@ -19,7 +19,7 @@ class FlickerClient {
     }
     
     static let searchRaduis = 10
-    static let numberOfResults = 24
+    static let numberOfResults = 60
     static var page = 1
     
     

@@ -100,12 +100,13 @@ extension CollectionViewController: UICollectionViewDataSource, UICollectionView
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: kCollectionViewCellID, for: indexPath) as! CollectionViewCell
+        
         
         let aPhoto = fetchedResultsController.object(at: indexPath)
         
         cell.imageView.image = UIImage(data: aPhoto.imageData!)
+        cell.photoActivityIndicator.stopAnimating()
         
         return cell
     }
@@ -114,7 +115,7 @@ extension CollectionViewController: UICollectionViewDataSource, UICollectionView
         deletePhotoData(at: indexPath)
         collectionView.reloadData()
     }
-    
+        
 }
 
 // MARK: Collection View Flow Setup
@@ -128,6 +129,7 @@ extension CollectionViewController {
         flowLayout.minimumInteritemSpacing = space
         flowLayout.minimumLineSpacing = space
         flowLayout.itemSize = CGSize(width: widthDimension, height: heightDimension)
+                
     }
 }
 
@@ -242,7 +244,6 @@ extension CollectionViewController {
     func getAllPhotosData() {
         
         self.loadingPhotosIndicator.startAnimating()
-        self.loadingPhotosIndicator.isHidden = false
         
         var photosList: [FlickerPhotoDetails] = []
         
@@ -261,7 +262,6 @@ extension CollectionViewController {
                 }
             }
             self.loadingPhotosIndicator.stopAnimating()
-            self.loadingPhotosIndicator.isHidden = true
         })
     }
 }
